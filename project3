@@ -1,0 +1,58 @@
+import random
+
+# Define quiz questions and answers
+quiz_questions = [
+    {
+        'question': "What is the capital of France?",
+        'options': ["London", "Madrid", "Paris", "Berlin"],
+        'answer': "Paris"
+    },
+    {
+        'question': "Which planet is known as the 'Red Planet'?",
+        'options': ["Earth", "Mars", "Venus", "Jupiter"],
+        'answer': "Mars"
+    },
+    {
+        'question': "What is 7 multiplied by 3?",
+        'answer': "21"
+    }
+]
+
+def run_quiz():
+    score = 0
+
+    print("Welcome to the Quiz Game!")
+    print("Rules:")
+    print("1. Answer the questions to the best of your knowledge.")
+    print("2. You will get a point for each correct answer.")
+    
+    play_again = "yes"
+
+    while play_again.lower() == "yes":
+        random.shuffle(quiz_questions)
+        
+        for question_data in quiz_questions:
+            question = question_data['question']
+            options = question_data.get('options', [])
+            answer = question_data['answer']
+
+            print("\n" + question)
+            
+            if options:
+                for i, option in enumerate(options, 1):
+                    print(f"{i}. {option}")
+                user_answer = input("Select the correct option (1, 2, 3, etc.): ")
+                user_answer = options[int(user_answer) - 1]
+            else:
+                user_answer = input("Your answer: ")
+
+            if user_answer.lower() == answer.lower():
+                print("Correct!")
+                score += 1
+            else:
+                print(f"Wrong! The correct answer is: {answer}")
+
+        print(f"\nYour final score is: {score}/{len(quiz_questions)}")
+        play_again = input("Do you want to play again? (yes/no): ")
+
+run_quiz()
